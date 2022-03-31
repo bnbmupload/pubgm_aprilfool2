@@ -1,0 +1,151 @@
+﻿<html>
+<head>
+<link rel="stylesheet" type="text/css" href="flame.css" />
+</head>
+<body>
+<div id = "large1">
+	<div id = "area2">
+		<div id="area2_level">
+			<!-- 현재 보유중인 차량에 체크하세요<br> -->
+			<!-- <div class="inputtext"><label>아벤타도르 그린 </label><input type="checkbox" id="iag" value="160"></div> -->
+			<!-- <div class="inputtext"><label>에스토크 메탈그레이</label><input type="checkbox" id="iem" value="130"></div> -->
+			<!-- <div class="inputtext"><label>우르스 썬</label><input type="checkbox" id="ius" value="130"></div> -->
+			<!-- <br> -->
+			<!-- <div class="inputtext"><label>아벤타도르 블루 </label><input type="checkbox" id="iab" value="160"></div> -->
+			<!-- <div class="inputtext"><label>에스토크 골드</label><input type="checkbox" id="ieg" value="130"></div> -->
+			<!-- <div class="inputtext"><label>우르스 펄</label><input type="checkbox" id="iup" value="130"></div> -->
+			<!-- <br> -->
+			<div class="inputtext"><label>현재 뽑은 횟수</label><input type="number" id="cgn" value="0"></div>
+			<!-- <div class="inputtext"><label>현재 보유 휘장</label><input type="number" id="ctk" value="0"></div> -->
+			
+		</div>
+	</div>
+	<!-- <div id = "area2"> -->
+		<!-- <div id="area2_level"> -->
+			<!-- <br><br>목표 차량에 체크하세요<br> -->
+			<!-- <div class="inputtext"><label>아벤타도르 그린 </label><input type="checkbox" id="ag" value="160"></div> -->
+			<!-- <div class="inputtext"><label>에스토크 메탈그레이</label><input type="checkbox" id="em" value="130"></div> -->
+			<!-- <div class="inputtext"><label>우르스 썬</label><input type="checkbox" id="us" value="130"></div> -->
+			<!-- <div class="inputtext"><label>람보르기니 아무거나!</label><input type="checkbox" id="la" value="130"></div> -->
+			<!-- <br> -->
+			<!-- <div class="inputtext"><label>아벤타도르 블루 </label><input type="checkbox" id="ab" value="160"></div> -->
+			<!-- <div class="inputtext"><label>에스토크 골드</label><input type="checkbox" id="eg" value="130"></div> -->
+			<!-- <div class="inputtext"><label>우르스 펄</label><input type="checkbox" id="up" value="130"></div> -->
+			<!-- <div class="inputtext"><label>밑에줄 3개중 아무거나!</label><input type="checkbox" id="ls" value="130"></div> -->
+			<!-- <br>			 -->
+			<!-- <div class="inputtext"><label>아벤타도르 그래파이트(히든)</label><input type="checkbox" id="ap" value="130"></div> -->
+		<!-- </div> -->
+		<!-- <br> -->
+	<!-- </div> -->
+	<input type="button" value="계산하기" onclick="calc()">
+	</div>
+<div id="large2">
+<!-- 이 영역은 결과를 표시합니다. -->
+	<div id ="result">계산 대기중...</div>
+</div>
+
+
+
+</body>
+<script>
+function calc()
+{
+	var text = "";
+	var totaltry = 0;
+	var totaluc = 0;
+	var ucc = 0;
+	for (i = 0; i < 1;) 
+	{
+		var cgn = document.getElementById("cgn").value;
+		cgn *= 1;
+		for (i = 0; i < 1;) 	
+		{
+			/*
+				성공 조건 판단
+			*/
+			if (cgn >= 350)
+			{
+					totaltry = totaltry + 1;
+					break				
+			}
+			if (cgn == 54||cgn==109||cgn==164||cgn==219||cgn==274||cgn==329)
+			{
+				i=0;
+			}
+			else if (cgn == 349)
+			{
+				ucc = ucc + 1;		
+				cgn = cgn + 1;			
+				totaltry = totaltry + 1;
+				break				
+			}
+			else
+			{
+				var random = Math.random();
+				if (random <= 0.003)
+				{
+					ucc = ucc + 1;
+					cgn = cgn + 1;
+					totaltry = totaltry + 1;
+					break					
+				}
+			}
+			ucc = ucc + 1;
+			cgn = cgn + 1;			
+		}
+		if (totaltry >= 30000)
+			break
+	}
+	/*
+		텍스트 처리부
+	*/
+	ucc = ucc/totaltry;
+	var ucccounter = nwc(Math.ceil(ucc/10)*10)
+	totaluc = Math.ceil(ucc/10)*1620;
+	var totalmoney = Math.ceil(totaluc/8100);
+	totalmoney = nwc(totalmoney*110000);
+	totaluc = nwc(totaluc);
+	if (ucc == 0)
+	{
+		text ="이미 조건을 만족했는데?? 0 UC 컷!";
+	}
+	else
+	{
+	text += "평균적으로 ";
+	text += ucccounter;
+	text += "번 뽑아서 ";
+	text += totaluc;
+	text += "UC 사용해서 끝냈당<br>";
+	text += "이거 UC 주유소 없이 11만 단위로 구입하면 ";
+	text += totalmoney;	
+	text += "원임 ㅋㅋ 과금 멈춰!";
+	}
+	document.getElementById("result").innerHTML = text;
+}
+function nwc(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function opi(x) {
+	if (x >= 0)
+		return x
+	return 0
+}
+function parseIntS(x){
+	x = parseFloat(x)
+	if (isNaN(x))
+		return 0
+	return x;
+}
+function pick4(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+	a = a.slice(0,4);
+    return a;
+}
+</script>
+</html>
